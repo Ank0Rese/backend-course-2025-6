@@ -3,6 +3,8 @@ const express = require('express');
 const multer = require('multer');
 const fs = require('fs').promises;
 const path = require('path');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 program
   .option('-h, --host <address>', 'адреса сервера')
@@ -47,6 +49,26 @@ const upload = multer({ storage: storage });
 
 let inventory = [];
 let nextId = 1;
+
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Сервіс інвентаризації API',
+      version: '1.0.0',
+      description: 'API для управління інвентарем',
+    },
+    servers: [
+      {
+        url: `http://${options.host}:${options.port}`,
+      },
+    ],
+  },
+  apis: ['./main.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.post('/register', upload.single('photo'), (req, res) => {
   if (!req.body.inventory_name) {
@@ -172,10 +194,23 @@ app.post('/search', (req, res) => {
   res.json(result);
 });
 
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>Сервіс інвентаризації</h1>
+    <ul>
+      <li><a href="/RegisterForm.html">Форма реєстрації</a></li>
+      <li><a href="/SearchForm.html">Форма пошуку</a></li>
+      <li><a href="/inventory">Список інвентарю (JSON)</a></li>
+      <li><a href="/docs">Документація Swagger</a></li>
+    </ul>
+  `);
+});
+
 app.use((req, res) => {
   res.status(405).send('Метод не підтримується');
 });
 
 app.listen(options.port, options.host, () => {
   console.log(`Сервіс інвентаризації запущено на http://${options.host}:${options.port}`);
+  console.log(`Документація Swagger доступна за адресою: http://${options.host}:${options.port}/docs`);
 });
