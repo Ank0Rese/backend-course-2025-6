@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "6f788c36-0359-4b56-aa3d-ab5ae87e585f",
+		"name": "Lab6",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50105694",
+		"_collection_link": "https://maksymrozhko-6112811.postman.co/workspace/Maksym's-Workspace~d43540cb-8318-4c4d-858a-dd171c7e95aa/collection/50105694-6f788c36-0359-4b56-aa3d-ab5ae87e585f?action=share&source=collection_link&creator=50105694"
+	},
+	"item": [
+		{
+			"name": "Create new item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "inventory_name",
+							"value": "test laptop",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "A powerful laptop for testing purposes",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/Maks/labbackend/lab6/cache/Item.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get inventory",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "inventory_name",
+							"value": "test laptop",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "A powerful laptop for testing purposes",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/Maks/Downloads/Claire Danes, the fallen star on a unicorn Stardust Movie.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/inventory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get item by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/inventory/004aa90f-93f1-43bd-bed7-280c6884181c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"004aa90f-93f1-43bd-bed7-280c6884181c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update info",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"inventory_name\": \"My Updated Test Laptop\",\r\n    \"description\": \"This description has been updated.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/inventory/c685b8cf-5187-4cb1-89f5-781ae69d80b2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"c685b8cf-5187-4cb1-89f5-781ae69d80b2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/inventory/004aa90f-93f1-43bd-bed7-280c6884181c/photo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"004aa90f-93f1-43bd-bed7-280c6884181c",
+						"photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/inventory/c685b8cf-5187-4cb1-89f5-781ae69d80b2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"inventory",
+						"c685b8cf-5187-4cb1-89f5-781ae69d80b2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "004aa90f-93f1-43bd-bed7-280c6884181c",
+							"type": "text"
+						},
+						{
+							"key": "has_photo",
+							"value": "on",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
